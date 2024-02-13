@@ -30,6 +30,14 @@ class AuthUser:
         self._get_user_instance()
         return self.user_instance
 
+    @property
+    def id(self):
+        try:
+            return self.django_user().id
+        except Exception as ee:
+            log.trace([self])
+            log.error(ee)
+
     def contact(self):
         self._get_contact_instance()
         return self.contact_instance
@@ -224,5 +232,8 @@ class AuthUser:
             self.contact_instance.save()
             return
 
-    def __repr__(self):
+    def __str__(self):
         return f"{self.first_name} {self.last_name} <{self.email}>".strip()
+
+    def __repr__(self):
+        return str(self)
