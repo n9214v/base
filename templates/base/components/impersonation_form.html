@@ -1,0 +1,30 @@
+{% load base_taglib %}
+{%if can_impersonate %}
+    {%popup id="impersonation-form-container" class="popup-xs" hidden=True%}
+        <div class="text-center">
+            {%fa fad fa-user-secret fa-6x%}
+            <h2 class="h3 mb-3 font-weight-normal">Impersonation</h2>
+        </div>
+        <form action="{% url 'base:start_impersonating' %}" method="post" id="impersonation-form" onsubmit="show_auth_spinner();">
+            {%csrf_token%}
+            <label class="sr-only">Email Address</label>
+            <div class="input-group mb-3">
+                <input type="email"
+                       id="impersonation-form-input"
+                       name="impersonation_data"
+                       placeholder="Email Address"
+                       class="form-control"
+                />
+                <button class="btn btn-outline-success" type="submit">Go</button>
+            </div>
+        </form>
+        <div class="text-center">
+            <br />
+            <button type="button" class="btn btn-outline-secondary" onclick="toggle_impersonation_form();">Cancel</button>
+        </div>
+    {%end_popup%}
+
+    <script type="text/javascript">
+        {%include "base/components/impersonation.js"%}
+    </script>
+{% endif %}

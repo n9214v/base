@@ -1,0 +1,5 @@
+{% load account %}
+{% load base_taglib %}
+
+{% user_display user as name %}
+{%fa far fa-user-circle%} Successfully signed in as {{name}}.

@@ -1,0 +1,14 @@
+{% load base_taglib %}
+<div class="header-action">
+    {%include "base/template/standard/navbar/hamburger.html"%}
+</div>
+<div class="header-icons">
+    <div style="float: right;">
+        {%fa fa-farm fa-fw%}
+        {%fa fa-street-view fa-fw%}
+        {%include 'base/template/standard/header/settings/_menu.html' %}
+    </div>
+</div>
+<div class="header-auth">
+    {%include "base/template/standard/header/auth/container.html"%}
+</div>

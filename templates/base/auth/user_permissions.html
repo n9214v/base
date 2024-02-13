@@ -1,0 +1,64 @@
+{% extends 'base/template/standard/template.html' %}
+{% load base_taglib %}
+
+{%block title%}Manage User Permissions{%endblock%}
+
+{% block main_content %}
+    <h1>Manage User Permissions - {{user.email}}</h1>
+
+    <h2>Active Permissions</h2>
+
+    <form method="post" action="{%url 'base:add_permission' user.id%}">
+        {%csrf_token%}
+        <table class="table table-condensed">
+            <tr>
+                <th scope="col">Permission</th>
+                <th scope="col">Granted</th>
+                <th scope="col">Actions</th>
+            </tr>
+
+        {%for pp in permissions%}
+            <tr>
+                <td>{{pp.authority.title}}</td>
+                <td>{{pp.since}}</td>
+                <td><a href="{%url 'base:delete_permission' pp.id%}">{%fa far fa-trash-alt text-danger%}</a></td>
+            </tr>
+        {%empty%}
+            <tr>
+                <td colspan="3">No Permissions</td>
+            </tr>
+        {%endfor%}
+
+            <tr>
+                <td>{%select_menu options=authority_options class="form-select" name="authority_id"%}</td>
+                <td>{%fa fas fa-user-plus text-success aria-label="Submit" onclick="this.form.submit();"%}</td>
+            </tr>
+        </table>
+    </form>
+
+
+
+    {%if permission_history%}
+    <h2>Permission History</h2>
+        <table class="table table-condensed">
+            <tr>
+                <th scope="col">Permission</th>
+                <th scope="col">Granted</th>
+                <th scope="col">Revoked</th>
+            </tr>
+
+        {%for pp in permission_history%}
+            <tr>
+                <td>{{pp.authority.title}}</td>
+                <td>{{pp.since}}</td>
+                <td>{{pp.end_date}}</td>
+            </tr>
+        {%empty%}
+            <tr>
+                <td colspan="3">No Permission History</td>
+            </tr>
+        {%endfor%}
+        </table>
+    {%endif%}
+
+{%endblock%}

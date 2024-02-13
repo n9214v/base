@@ -1,0 +1,70 @@
+/** Styles for components that are the (mostly) same across all templates **/
+@import 'variables';
+
+.smokescreen{
+    position:fixed;
+    top: 0;
+    right:0;
+    bottom:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 999998;
+    background: rgba(20, 20, 20, .4);
+}
+
+.popup{
+    position:fixed;
+    top: 25%;
+    transform: translateY(-25%);
+    right:0;
+    bottom:0;
+    left:0;
+    margin:auto;
+    background-color: lighten($navbar_bg_color, 80%);
+    z-index: 999999;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    border: 3px solid lighten($navbar_bg_color, 20%);
+    border-radius: 5px;
+    padding: 20px 10px;
+}
+.popup-xs{
+    top: 60px;
+    max-width: 400px;
+    height: 400px;
+    max-height: 80%;
+}
+.popup-sm{
+    max-width: 600px;
+}
+.popup-md{
+    max-width: 800px;
+}
+.popup-lg{
+    max-width: 1000px;
+}
+.popup-loading{
+    border-radius: 20px;
+    max-width: 250px;
+    max-height: 250px;
+    text-align: center;
+    overflow: hidden;
+}
+.popup-loading .loading-text{
+    font-weight: bold;
+    color: $navbar_bg_color;
+    font-size: 2em;
+    margin-bottom: 25px;
+}
+
+.google-login-button{
+    background-color: #F2F2F2;
+    color: #1F1F1F;
+    border: 0px solid #747775;
+    border-radius: 20px;
+    padding: 7px 10px;
+    text-align: center;
+    font-size: 1.1em;
+}

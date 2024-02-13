@@ -1,0 +1,53 @@
+{% load base_taglib %}
+
+{% if user.is_authenticated %}
+    <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="auth-menu-button" data-bs-toggle="dropdown" aria-expanded="false">
+            {%if avatar_url%}
+            <div class="profile_thumbnail">
+                <img src="{{avatar_url}}"  />
+            </div>
+            {%endif%}
+            <span class="auth-name">{{current_user.contact.display_name}}</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="auth-menu-button">
+            <li>
+                <a class="dropdown-item" href="{% url 'base:profile' %}">
+                    {%fa fal fa-user fa-fw%}
+                    Profile
+                </a>
+            </li>
+
+            {%if can_impersonate %}
+                {# Link to Remove Current Impersonation ########}
+                {% if is_impersonating %}
+                <li>
+                    <a class="dropdown-item" href="{% url 'base:stop_impersonating' %}" onclick="show_auth_spinner();">
+                        {%fa fal fa-undo fa-fw%}
+                        Be Yourself
+                    </a>
+                </li>
+                {% endif %}
+
+                {# Link for impersonation selection form #######}
+                <li>
+                    <a class="dropdown-item" onclick="toggle_impersonation_form();">
+                        {%fa fal fa-user-secret fa-fw%}
+                        Impersonate Someone{%if is_impersonating%} Else{%endif%}
+                    </a>
+                </li>
+            {% endif %}
+
+            <li>
+                <a class="dropdown-item" href="{% url 'account_logout' %}">
+                    {%fa fal fa-sign-out fa-fw%}
+                    Log Out
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    {%include "base/components/impersonation_form.html"%}
+
+{%endif%}

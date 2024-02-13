@@ -1,0 +1,8 @@
+{% load base_taglib %}
+<div class="header-menu" id="auth-menu">
+{% if user.is_authenticated %}
+    {%include "base/template/standard/header/auth/_menu.html"%}
+{% else %}
+    {%include "base/template/standard/header/auth/_links.html"%}
+{% endif %}
+</div>

@@ -1,0 +1,4 @@
+{% load base_taglib %}
+{%fa far fa-sign-out%}
+You have been logged out.
+
