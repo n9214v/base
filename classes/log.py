@@ -11,7 +11,7 @@ class Log:
     fn_times = None
 
     def __init__(self):
-        self.logger = logging.getLogger('demo')
+        self.logger = logging.getLogger('base')
         self.fn_times = {}
 
     def debug(self, msg, strip_html=False):
