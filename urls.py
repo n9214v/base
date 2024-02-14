@@ -10,6 +10,7 @@ urlpatterns = [
     path('messages', views.messages, name='messages'),
 
     # Authentication
+    path('router', views.post_login_handler, name='post_login_handler'),
 
     # Authorization
     path('auth/authorities', views.manage_authorities, name='manage_authorities'),

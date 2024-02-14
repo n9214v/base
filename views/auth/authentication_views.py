@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponse
 from ...classes.log import Log
-from ...services import auth_service, error_service
+from ...services import auth_service, error_service, utility_service
 from ...decorators import require_impersonation_authority, require_authority, require_authentication
 
 
@@ -58,3 +58,10 @@ def proxy_search(request):
         request, 'auth/proxy_search.html',
         {'found': found}
     )
+
+
+@require_authentication()
+def post_login_handler(request):
+    next_url = utility_service.get_session_var("after_auth_url", "/")
+    utility_service.set_session_var("after_auth_url", None)
+    return redirect(next_url)

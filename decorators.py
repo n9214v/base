@@ -67,6 +67,8 @@ def require_authentication(redirect_url=None):
 
             # If not logged in, redirect
             if not request.user.is_authenticated:
+                # Remember where to return after logging in
+                utility_service.set_session_var("after_auth_url", request.path)
                 # If redirecting somewhere other than default login
                 if redirect_url:
                     return decorator_redirect(request, redirect_url)
