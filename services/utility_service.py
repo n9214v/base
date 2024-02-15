@@ -584,27 +584,6 @@ def csv_to_list(src, convert_int=False):
         return result_list
 
 
-def options_list_to_dict(options):
-    """
-    Finti returns options from validation tables as a list of dicts.
-    This function converts the list of dicts to a single dict of options
-    """
-    # Expecting a list of {id:, value:} dicts
-    # A list of {key:, value:} dicts will also work
-    if type(options) is list:
-        # Convert the list to one big dict
-        option_dict = OrderedDict()
-        for ii in options:
-            option_dict[ii['id' if 'id' in ii else 'key']] = ii['value']
-        return option_dict
-    elif type(options) is dict:
-        return options
-    else:
-        log.error(
-            "Invalid datatype for options. Expecting list of {0}. Got {1}".format('{id:, value:} dicts', type(options))
-        )
-
-
 def get_gravatar_image_src(email_address):
     """
         If the user has a Gravatar image, it will be used as their default profile image.

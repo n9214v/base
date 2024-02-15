@@ -62,12 +62,21 @@
     width: 100%;
     color: inherit;
 }
+.navbar-content .fa-li{
+    font-size: .9em;
+}
+.navbar-content .fa-ul a{
+    font-size: .9em;
+    border: 0;
+}
+
 /** HAMBURGER **/
 #hamburger-menu{
     display: none;
 }
 #hamburger-menu .dropdown-item{
     cursor: default;
+    background-color: inherit;
 }
 #hamburger-menu .dropdown-header{
     font-weight: bold;
@@ -82,6 +91,13 @@
     color: lighten($navbar_fg_color, 10%);
     font-weight: bold;
     cursor: pointer;
+}
+#hamburger-menu .fa-li{
+    font-size: .9em;
+}
+#hamburger-menu .fa-ul a{
+    font-size: .9em;
+    border: 0;
 }
 
 @media screen and (max-width: 800px) {

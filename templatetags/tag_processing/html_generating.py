@@ -1,4 +1,5 @@
 from django import template
+from django.db.models.query import QuerySet
 from ...classes.log import Log
 from ...services import utility_service, error_service, auth_service
 from . import supporting_functions as support
@@ -188,13 +189,25 @@ class SelectNode(template.Node):
             pieces.append("multiple")
         pieces.append(">")
 
-        # Options may be a dict, or a list of {id:, value:} dicts
-        if type(options) is list:
-            # Convert the list to one big dict
-            options = utility_service.options_list_to_dict(options)
+        # Options must be a dict. Convert some other common types.
+        if options and type(options) is not dict:
+            if type(options) is QuerySet:
+                options = list(options)
 
-        # Now also accepting strings that refer to common option sets
-        elif type(options) is str:
+            if type(options) is list:
+                # Convert the list a dict
+                # Sample the first item to see if it contains an ID attribute
+                try:
+                    if hasattr(options[0], "id"):
+                        options = {x.id: str(x) for x in options}
+                    else:
+                        options = {x: x for x in options}
+                except Exception as ee:
+                    log.debug("Error converting list to dict for select menu")
+                    log.error(ee)
+
+        # Accept strings that refer to common option sets
+        if type(options) is str:
             # Yes-No menus in each order (for defaulting to Y or N)
             if options.upper() == 'YN':
                 options = {'Y': 'Yes', 'N': 'No'}
